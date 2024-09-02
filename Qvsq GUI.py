@@ -93,9 +93,10 @@ file_entry = tk.Entry(root, width=30)
 file_entry.grid(row=0, column=1, padx=5, pady=5)
 browse_button = tk.Button(root, text="Browse",command=browse_files)
 browse_button.grid(row=0, column=2, padx=5, pady=5)
+
 # File 2 selection
 file_label2 = tk.Label(root, text="File 2 Path:")
-file_label2.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+file_label2.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
 file_entry2 = tk.Entry(root, width=30)
 file_entry2.grid(row=0, column=1, padx=5, pady=5)
 browse_button2 = tk.Button(root, text="Browse",command=browse_files)
@@ -115,25 +116,6 @@ def EmailCheck():
         domains_entry.insert(0, "Provide valid Email Domains...")
         domains_entry.configure(foreground= "gray", state='disabled')
 
-# Unsupported Characters
-def UnsupportedCharsCheck():
-    UnsupportedCharsCheckFlag = False
-    if var_unsupported_chars.get():
-        UnsupportedCharsCheckFlag = True
-    if UnsupportedCharsCheckFlag:
-        user_entry_unsupported_chars.configure(state='normal', foreground="black")
-        user_entry_unsupported_chars.delete(0, tk.END)
-    else:
-        user_entry_unsupported_chars.delete(0, tk.END)
-        user_entry_unsupported_chars.insert(0, "Provide Unsupported Characters...")
-        user_entry_unsupported_chars.configure(foreground= "gray", state='disabled')
-
-# Check options
-var_blank_cells = tk.BooleanVar()
-var_duplicate_ids = tk.BooleanVar()
-var_invalid_emails = tk.BooleanVar()
-var_unsupported_chars = tk.BooleanVar()
-var_excessive_lengths = tk.BooleanVar()
 
 checks_frame = tk.LabelFrame(root, text="Select required check(s) for your participant file")
 checks_frame.grid(row=3, column=0, columnspan=5, padx=15, pady=15, sticky=tk.W)
@@ -141,47 +123,23 @@ checks_frame.grid(row=3, column=0, columnspan=5, padx=15, pady=15, sticky=tk.W)
 blank_cells_check = tk.Checkbutton(checks_frame, text="Check for blank cells", variable=var_blank_cells)
 blank_cells_check.grid(row=1, column=0, sticky=tk.W)
 
-duplicate_ids_check = tk.Checkbutton(checks_frame, text="Check for duplicate unique identifiers", variable=var_duplicate_ids)
-duplicate_ids_check.grid(row=2, column=0, sticky=tk.W)
-
-invalid_emails_check = tk.Checkbutton(checks_frame, text="Check for invalid and duplicate emails", variable=var_invalid_emails, command=EmailCheck)
-invalid_emails_check.grid(row=3, column=0, sticky=tk.W)
-# Email domains input
-domains_entry = tk.Entry(checks_frame, width=40)
-domains_entry.insert(0, "Provide valid Email Domains...")
-domains_entry.grid(row=3, column=1, padx=5, pady=5, columnspan=3)
-domains_entry.configure(foreground= "gray", state='disabled')
-
-unsupported_chars_check = tk.Checkbutton(checks_frame, text="Check for unsupported characters", variable=var_unsupported_chars, command=UnsupportedCharsCheck)
-unsupported_chars_check.grid(row=4, column=0, sticky=tk.W)
-#Unsupported characters input
-user_entry_unsupported_chars = tk.Entry(checks_frame, width=40)
-user_entry_unsupported_chars.insert(0, "Provide Unsupported Characters...")
-user_entry_unsupported_chars.grid(row=4, column=1, padx=5, pady=5, columnspan=3)
-user_entry_unsupported_chars.configure(foreground= "gray", state='disabled')
-
-excessive_lengths_check = tk.Checkbutton(checks_frame, text="Check for excessive lengths", variable=var_excessive_lengths)
-excessive_lengths_check.grid(row=5, column=0, sticky=tk.W)
-
-#LIST OF UNSUPPORTED CHARACTERS
-
 unsupported_chars_list_frame = tk.LabelFrame(root, text = "HOW TO USE:")
 unsupported_chars_list_frame.grid(row=4, column=0,columnspan=5, padx=15, pady=15, sticky=tk.W)
 
-unsupported_chars_list_1=tk.Label(unsupported_chars_list_frame, text='1.Select the participant file to analyze. ')
+unsupported_chars_list_1=tk.Label(unsupported_chars_list_frame, text='1.Select the two score files to compare. ')
 unsupported_chars_list_1.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-unsupported_chars_list_3=tk.Label(unsupported_chars_list_frame, text='3.Select all the checks you need.')
-unsupported_chars_list_3.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-unsupported_chars_list_2=tk.Label(unsupported_chars_list_frame, text="2.Provide valid Email Domains, (comma-separated, without '@'). ")
-unsupported_chars_list_2.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)
-unsupported_chars_list_2=tk.Label(unsupported_chars_list_frame, text='2.Provide unsupported characters (NO comma-separated). ')
-unsupported_chars_list_2.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
-unsupported_chars_list_4=tk.Label(unsupported_chars_list_frame, text='4.Click "Run Check!"')
-unsupported_chars_list_4.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)
+unsupported_chars_li2=tk.Label(unsupported_chars_list_frame, text='2.Click on "compare" button.')
+unsupported_chars_li2.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
+unsupported_chars_list_3=tk.Label(unsupported_chars_list_frame, text="3.Provide valid Email Domains, (comma-separated, without '@'). ")
+unsupported_chars_list_3.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)
+unsupported_chars_list_4=tk.Label(unsupported_chars_list_frame, text='4.Provide unsupported characters (NO comma-separated). ')
+unsupported_chars_list_4.grid(row=4, column=1, padx=5, pady=5, sticky=tk.W)
+unsupported_chars_list_5=tk.Label(unsupported_chars_list_frame, text='5.Click "Run Check!"')
+unsupported_chars_list_5.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)
 
 
 # Run checks button
-run_button = tk.Button(root, text="Run Checks!", command=run_checks)
+run_button = tk.Button(root, text="Run Comparison!", command=run_comparison)
 run_button.grid(row=5, column=0, columnspan=2, padx=5, pady=10)
 
 new=1
